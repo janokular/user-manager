@@ -85,7 +85,7 @@ do
     # Check if user account should be deleted or disabled
     if [[ "${DELETE}" = 'true' ]]
     then
-      # Delete the user.
+      # Delete the user
       userdel ${REMOVE_HOME_DIR} ${ACCOUNT}
 
       # Check to see if the userdel command succeeded
@@ -96,7 +96,7 @@ do
       fi
       echo "The account ${ACCOUNT} was deleted."
     else
-      # Disable user.
+      # Disable user
       chage -E 0 ${ACCOUNT}
       
       # Check to see if the chage command succeeded
