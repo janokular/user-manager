@@ -31,7 +31,7 @@ COMMENT="${@}"
 # Generate password
 PASSWORD=$(date +%s%N | sha256sum | head -c48)
 
-# Create the user with the password.
+# Create the user with the password
 useradd -c "${COMMENT}" -m ${USER_NAME}
 
 # Check to see if the useradd command succeeded
