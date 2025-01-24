@@ -1,11 +1,11 @@
 #!/bin/bash
-#
-# This script disables, deletes, and/or archives users on the local system.
+
+# This script disables, deletes, and/or archives users on the local system
 
 ARCHIVE_DIR='/archive'
 
 usage() {
-  # Usage message.
+  # Usage message
   echo "Usage: ${0} [-dra] USER [USERN]"
   echo 'Disable a local Linux account.'
   echo '-d Deletes accounts instead of disabling them.'
@@ -14,14 +14,14 @@ usage() {
   exit 1
 }
 
-# Check if script was run with sudo privliges.
+# Check if script was run with sudo privliges
 if [[ "${UID}" -ne 0 ]]
 then
   echo "Pleas run with sudo or as a root." >&2
   exit 1
 fi
 
-# Check options provided by the user.
+# Check options provided by the user
 while getopts dra OPTION
 do
   case ${OPTION} in
@@ -32,7 +32,7 @@ do
   esac
 done
 
-# Remove the options while leaving the remaining arguments.
+# Remove the options while leaving the remaining arguments
 shift "$(( OPTIND - 1 ))"
 
 # Check if user provided arguments to the script.
@@ -41,18 +41,18 @@ then
   usage
 fi
 
-# Loop through all the usernames supplied as arguments.
+# Loop through all the usernames supplied as arguments
 for ACCOUNT in "${@}"
 do
   echo "Processing user: ${ACCOUNT}"
-  # Check if user is not trying to disable a system account.
+  # Check if user is not trying to disable a system account
   ACC_UID=$(id -u "${ACCOUNT}")
   if [[ "${ACC_UID}" -lt 1000 ]]
   then
     echo "Refusing to remove the ${ACCOUNT} account with UID ${ACC_UID}." >&2
     exit 1
   else
-    # Check if the account should be archived and if directory ARCHIVE_DIR exists.
+    # Check if the account should be archived and if directory ARCHIVE_DIR exists
     if [[ "${ARCHIVE}" = 'true' ]]
     then
       if [[ ! -d "${ARCHIVE_DIR}" ]]
@@ -65,7 +65,7 @@ do
         fi
       fi
 
-      # Archive the user's home directory and move it into the ARCHIVE_DIR.
+      # Archive the user's home directory and move it into the ARCHIVE_DIR
       HOME_DIR="/home/${ACCOUNT}"
       ARCHIVE_FILE="${ARCHIVE_DIR}/${ACCOUNT}.tgz"
       if [[ -d "${HOME_DIR}" ]]
@@ -83,13 +83,13 @@ do
       fi
     fi
 
-    # Check if user account should be deleted or disabled.
+    # Check if user account should be deleted or disabled
     if [[ "${DELETE}" = 'true' ]]
     then
       # Delete the user.
       userdel ${REMOVE_HOME_DIR} ${ACCOUNT}
 
-      # Check to see if the userdel command succeeded.
+      # Check to see if the userdel command succeeded
       if [[ "${?}" -ne 0 ]]
       then
         echo "The account ${ACCOUNT} was NOT deleted." >&2
@@ -100,7 +100,7 @@ do
       # Disable user.
       chage -E 0 ${ACCOUNT}
       
-      # Check to see if the chage command succeeded.
+      # Check to see if the chage command succeeded
       if [[ "${?}" -ne 0 ]]
       then
         echo "The account ${ACCOUNT} was NOT disabled." >&2
