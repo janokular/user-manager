@@ -5,7 +5,6 @@
 ARCHIVE_DIR='/archive'
 
 usage() {
-  # Usage message
   echo "Usage: ${0} [-dra] USER [USERN]"
   echo 'Disable a local Linux account.'
   echo '-d Deletes accounts instead of disabling them.'
