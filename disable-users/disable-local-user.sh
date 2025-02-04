@@ -16,7 +16,7 @@ usage() {
 # Check if script was run with sudo privliges
 if [[ "${UID}" -ne 0 ]]
 then
-  echo "Pleas run with sudo or as a root." >&2
+  echo "Please run with sudo or as a root." >&2
   exit 1
 fi
 
