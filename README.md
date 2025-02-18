@@ -1,2 +1,2 @@
-# user management
-user management
+# user manager
+user manager
