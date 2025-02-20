@@ -6,7 +6,7 @@
 # A password will be automatically generated for the account
 # The username, password, and host for the account will be displayed
 
-# Make sure the script is being executed with superuser privliges
+# Make sure the script is being executed with superuser privileges
 if [[ "${UID}" -ne 0 ]]
 then
   echo 'Please run with sudo or as root.' >&2
