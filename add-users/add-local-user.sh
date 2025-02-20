@@ -3,7 +3,7 @@
 # This script creates a new user on the local system
 # You will be prompted for the account name, the person name and password
 
-# Make sure the script is being executed with superuser privliges
+# Make sure the script is being executed with superuser privileges
 if [[ "${UID}" -ne 0 ]]
 then
   echo 'Please run with sudo or as root.'
